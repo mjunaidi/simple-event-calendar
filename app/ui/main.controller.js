@@ -57,7 +57,7 @@
       config : function() {
         return {
           'get' : {
-            'paths' : [ 'trendui/app/ui/json/about.json' ],
+            'paths' : [ './app/ui/json/about.json' ],
             'key' : 'init'
           }
         };
