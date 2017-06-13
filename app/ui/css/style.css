@@ -152,3 +152,9 @@ div.home {
   word-wrap: break-word;
 	-webkit-font-smoothing: antialiased;
 }
+
+@media screen and (max-width: 480px) {
+  .sec-calendar .sec-month.col-xs-6 {
+    width: 100%;
+  }
+}

@@ -77,12 +77,105 @@
 
   MainController.prototype._initBody = function() {
     if (this._location.path() === '/') {
-      /* Anything that needs to be executed in home page goes here... */
+      this.initCalendar();
     }
 
     if (this._location.path() === '/blog') {
       /* Anything that needs to be executed in path /free goes here... */
     }
+  };
+
+  MainController.prototype.initCalendar = function() {
+    var ctrl = this;
+
+    // display part
+    var days = [
+      {"name" : "Sunday"},
+      {"name" : "Monday"},
+      {"name" : "Tuesday"},
+      {"name" : "Wednesday"},
+      {"name" : "Thursday"},
+      {"name" : "Friday"},
+      {"name" : "Saturday"},
+    ];
+    for (var i in days) {
+      var day = days[i];
+      day.short = day.name.charAt(0);
+    }
+
+    var weeks = [
+      {"name" : "Week 1"},
+      {"name" : "Week 2"},
+      {"name" : "Week 3"},
+      {"name" : "Week 4"},
+      {"name" : "Week 5"}
+    ];
+
+    var months = [
+      {"name" : "January"},
+      {"name" : "February"},
+      {"name" : "March"},
+      {"name" : "April"},
+      {"name" : "May"},
+      {"name" : "June"},
+      {"name" : "July"},
+      {"name" : "August"},
+      {"name" : "September"},
+      {"name" : "October"},
+      {"name" : "November"},
+      {"name" : "December"}
+    ];
+
+    ctrl.names = {
+      "days" : days,
+      "weeks" : weeks,
+      "months" : months
+    };
+
+    // data part
+    var today = new Date();
+    var y = today.getFullYear();
+
+    var year = {
+      "id" : y
+    };
+
+    var months = [];
+
+    for (var i=0; i<12; i++) {
+      var month = {
+        "dates" : []
+      };
+      var started = false;
+      var week = 0;
+      for (var j=0; j<31; j++) {
+        var dt = new Date(Date.UTC(y, i, j+1));
+
+        if (dt.getMonth() > i) {
+          break;
+        }
+
+        if (!started) {
+          for (var k=0; k<dt.getDay(); k++) {
+            month.dates.push({
+              "week" : week
+            });
+          }
+          started = true;
+        }
+        dt.week = week;
+        month.dates.push(dt);
+        if (dt.getDay() == 6) {
+          week++;
+        }
+      }
+      months.push(month);
+    }
+
+    year.months = months;
+    ctrl.cal = {
+      "years" : [year]
+    };
   };
 
   MainController.prototype.generateUuid = function() {
