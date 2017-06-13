@@ -57,7 +57,7 @@
       config : function() {
         return {
           'get' : {
-            'paths' : [ './app/ui/json/about.json' ],
+            'paths' : [ 'simple-event-calendar/app/ui/json/about.json' ],
             'key' : 'init'
           }
         };
