@@ -4,16 +4,16 @@
   angular.module('app.model').controller('MainController', MainController);
 
   MainController.$inject = [ 'modelService', 'themeService', 'storageService',
-              '$uibModal', '$document', '$crypto', '$http', '$scope', '$location', '$routeParams',
-              '$timeout', 'hotkeys', 'uuid4'
-            ];
+            '$uibModal', '$document', '$crypto', '$http', '$scope', '$location',
+            '$routeParams', '$timeout', 'hotkeys', 'uuid4', 'Papa'
+          ];
 
   var DEFAULT_KEY = '';
   var ALPHABETS = 'abcdefghijklmnopqrstuvwxyz';
   var DATA_DIR = 'app/ui/data/';
 
   function MainController(modelService, themeService, storageService, uibModal,
-          document, crypto, http, scope, location, routeParams, timeout, hotkeys, uuid4) {
+          document, crypto, http, scope, location, routeParams, timeout, hotkeys, uuid4, Papa) {
     this._modelService = modelService;
     this._themeService = themeService;
     this._storageService = storageService;
@@ -27,6 +27,7 @@
     this._timeout = timeout;
     this._hotkeys = hotkeys;
     this._uuid4 = uuid4;
+    this._papa = Papa;
 
     this._initHeader();
     // _initBody called with ng-init in each page
@@ -146,11 +147,17 @@
 
     // data part
     var path = DATA_DIR + this._routeParams.name;
-    this._http.get(path)
+    ctrl._http.get(path)
       .success(function (data) {
-        console.log(data);
-      })
-      .error(function (data) {
+        ctrl._papa.parse(data)
+          .then(function(result) {
+            console.log(result);
+          }).catch(function(result) {
+            console.log('catch --> ' + result);
+          }).finally(function() {
+            console.log('done!');
+          });
+      }).error(function (data) {
         console.log(data);
       });
   };

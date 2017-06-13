@@ -19,6 +19,7 @@
     'cfp.hotkeys',
     'ng-autofocus',
     'uuid4',
-    'angular-underscore'
+    'angular-underscore',
+    'papa-promise'
   ]);
 })();
