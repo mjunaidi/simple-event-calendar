@@ -4,7 +4,7 @@
   angular.module('app.model').controller('MainController', MainController);
 
   MainController.$inject = [ 'modelService', 'themeService', 'storageService',
-              '$uibModal', '$document', '$crypto', '$http', '$scope', '$location',
+              '$uibModal', '$document', '$crypto', '$http', '$scope', '$location', '$routeParams',
               '$timeout', 'hotkeys', 'uuid4'
             ];
 
@@ -12,7 +12,7 @@
   var ALPHABETS = 'abcdefghijklmnopqrstuvwxyz';
 
   function MainController(modelService, themeService, storageService, uibModal,
-          document, crypto, http, scope, location, timeout, hotkeys, uuid4) {
+          document, crypto, http, scope, location, routeParams, timeout, hotkeys, uuid4) {
     this._modelService = modelService;
     this._themeService = themeService;
     this._storageService = storageService;
@@ -22,6 +22,7 @@
     this._http = http;
     this._scope = scope;
     this._location = location;
+    this._routeParams = routeParams;
     this._timeout = timeout;
     this._hotkeys = hotkeys;
     this._uuid4 = uuid4;
@@ -76,7 +77,9 @@
   };
 
   MainController.prototype._initBody = function() {
-    if (this._location.path() === '/') {
+    if (this._location.path() === '/'
+       || this._location.path().indexOf('/c/') >= 0
+    ) {
       this.initCalendar();
     }
 
@@ -88,7 +91,7 @@
   MainController.prototype.initCalendar = function() {
     var ctrl = this;
 
-    // display part
+    // calendar display part
     var days = [
       {"name" : "Sunday"},
       {"name" : "Monday"},
@@ -132,13 +135,17 @@
       "months" : months
     };
 
-    // data part
+    // calendar data part
     var today = new Date();
     var y = today.getFullYear();
     ctrl.cal = {
       "years" : []
     };
     ctrl.setYear(y);
+
+    // data part
+    console.log(this._routeParams.name);
+    
   };
 
   MainController.prototype.setYear = function(y) {
