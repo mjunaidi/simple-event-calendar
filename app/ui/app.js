@@ -18,6 +18,7 @@
     'ngclipboard',
     'cfp.hotkeys',
     'ng-autofocus',
-    'uuid4'
+    'uuid4',
+    'angular-underscore'
   ]);
 })();

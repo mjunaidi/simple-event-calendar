@@ -135,13 +135,42 @@
     // data part
     var today = new Date();
     var y = today.getFullYear();
+    ctrl.cal = {
+      "years" : []
+    };
+    ctrl.setYear(y);
+  };
 
+  MainController.prototype.setYear = function(y) {
+    var ctrl = this;
+    if (_.findWhere(ctrl.cal.years, {"id":y}) === undefined) {
+      if (y < ctrl.currentYear) {
+        ctrl.cal.years.unshift(ctrl.createYear(y));
+      } else  {
+        ctrl.cal.years.push(ctrl.createYear(y));
+      }
+    }
+    ctrl.currentYear = y;
+  };
+
+  MainController.prototype.prevYear = function() {
+    var ctrl = this;
+    ctrl.currentYear--;
+    ctrl.setYear(ctrl.currentYear);
+  };
+
+  MainController.prototype.nextYear = function() {
+    var ctrl = this;
+    ctrl.currentYear++;
+    ctrl.setYear(ctrl.currentYear);
+  };
+
+  MainController.prototype.createYear = function(y) {
+    var ctrl = this;
     var year = {
       "id" : y
     };
-
     var months = [];
-
     for (var i=0; i<12; i++) {
       var month = {
         "dates" : []
@@ -150,11 +179,9 @@
       var week = 0;
       for (var j=0; j<31; j++) {
         var dt = new Date(Date.UTC(y, i, j+1));
-
         if (dt.getMonth() > i) {
           break;
         }
-
         if (!started) {
           for (var k=0; k<dt.getDay(); k++) {
             month.dates.push({
@@ -171,13 +198,15 @@
       }
       months.push(month);
     }
-
     year.months = months;
-    ctrl.cal = {
-      "years" : [year]
-    };
+    return year;
   };
 
+  MainController.prototype.dummy = function() {
+
+  };
+
+  // existing utitlity codes
   MainController.prototype.generateUuid = function() {
     this.uuid = this._uuid4.generate();
   };
