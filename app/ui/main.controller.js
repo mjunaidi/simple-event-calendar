@@ -10,6 +10,7 @@
 
   var DEFAULT_KEY = '';
   var ALPHABETS = 'abcdefghijklmnopqrstuvwxyz';
+  var DATA_DIR = 'app/ui/data/';
 
   function MainController(modelService, themeService, storageService, uibModal,
           document, crypto, http, scope, location, routeParams, timeout, hotkeys, uuid4) {
@@ -144,8 +145,14 @@
     ctrl.setYear(y);
 
     // data part
-    console.log(this._routeParams.name);
-    
+    var path = DATA_DIR + this._routeParams.name;
+    this._http.get(path)
+      .success(function (data) {
+        console.log(data);
+      })
+      .error(function (data) {
+        console.log(data);
+      });
   };
 
   MainController.prototype.setYear = function(y) {
