@@ -1,8 +1,8 @@
 <div class="sec-calendar" ng-init="ctrl._initBody()">
   <div class="row" ng-repeat="y in ctrl.cal.years | filter:{ id: ctrl.currentYear} track by $index">
     <div class="col-xs-12">
-
-      <h2>
+      
+      <h2 class="center-block">
         <button type="button" class="btn btn-default" ng-click="ctrl.prevYear()">
           <span class="glyphicon glyphicon-chevron-left"></span>
         </button>
