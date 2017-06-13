@@ -24,7 +24,7 @@
               </th>
             </tr>
             <tr ng-repeat="w in ctrl.names.weeks track by $index">
-              <td class="col-xs-1 text-center" ng-repeat="d in m.dates | filter:{ week: $index } track by $index">
+              <td class="col-xs-1 text-center sec-day" ng-repeat="d in m.dates | filter:{ week: $index } track by $index">
                 {{d.getDate()}}
               </td>
             </tr>

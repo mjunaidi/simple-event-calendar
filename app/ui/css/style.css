@@ -153,12 +153,13 @@ div.home {
 	-webkit-font-smoothing: antialiased;
 }
 
-.sec-year {
-  margin-top: 0;
-}
-
+/* sec */
 @media screen and (max-width: 480px) {
   .sec-calendar .sec-month.col-xs-6 {
     width: 100%;
   }
+}
+
+.sec-year {
+  margin-top: 0;
 }
