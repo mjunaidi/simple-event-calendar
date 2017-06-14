@@ -80,7 +80,7 @@
 
   MainController.prototype._initBody = function() {
     if (this._location.path() === '/'
-       || this._location.path().indexOf('/c/') >= 0
+       || (this._location.path().indexOf('/') >= 0 && this._routeParams.c)
     ) {
       this.initCalendar();
     }
