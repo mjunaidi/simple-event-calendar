@@ -140,11 +140,25 @@
     var today = new Date();
     var y = today.getFullYear();
     ctrl.cal = {
+      "today" : today,
       "years" : [],
       "events" : []
     };
     ctrl.loadData();
     ctrl.setYear(y);
+  };
+
+  MainController.prototype.isToday = function(d) {
+    var ctrl = this;
+    if (!d) return false;
+    if (!(d instanceof Date)) return false;
+    var today = ctrl.cal.today;
+    if (today === d) return true;
+    if (today.getDate() === d.getDate()
+      && today.getMonth() === d.getMonth()
+      && today.getFullYear() === d.getFullYear()
+    ) return true;
+    return false;
   };
 
   MainController.prototype.loadData = function() {
