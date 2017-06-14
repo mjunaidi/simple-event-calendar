@@ -41,8 +41,6 @@
       pages: [
         {
           "name" : "Home", "path" : "/", "ra" : false
-        }, {
-          "name" : "Blog", "path" : "/blog", "ra" : false
         }
       ]
     };
@@ -80,7 +78,7 @@
 
   MainController.prototype._initBody = function() {
     if (this._location.path() === '/'
-       || (this._location.path().indexOf('/') >= 0 && this._routeParams.c)
+       || (this._location.path().indexOf('/c/') >= 0)
     ) {
       this.initCalendar();
     }
