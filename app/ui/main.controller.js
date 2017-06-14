@@ -187,6 +187,15 @@
       });
   };
 
+  MainController.prototype.eventOn = function(dt) {
+    if (!(dt instanceof Date)) return false;
+    var ctrl = this;
+    var y = dt.getFullYear();
+    var m = dt.getMonth();
+    var d = dt.getDate();
+    return _.findWhere(ctrl.cal.events, {"year": y, "month": m, "day": d});
+  };
+
   MainController.prototype.hasEvent = function(dt) {
     if (!(dt instanceof Date)) return false;
     var ctrl = this;
