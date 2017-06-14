@@ -6,7 +6,7 @@
   function configureRoutes($routeProvider, $locationProvider) {
     $routeProvider.when("/", {
       templateUrl : 'app/ui/html/calendar.html'
-    }).when("/c/:name", {
+    }).when("/c/:c", {
       templateUrl : 'app/ui/html/calendar.html'
     }).when("/home", {
       templateUrl : 'app/ui/html/home.html'

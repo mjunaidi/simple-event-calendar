@@ -145,10 +145,18 @@
       "years" : [],
       "events" : []
     };
+    ctrl.loadData();
     ctrl.setYear(y);
+  };
 
-    // data part
-    var path = DATA_DIR + this._routeParams.name;
+  MainController.prototype.loadData = function() {
+    var ctrl = this;
+    var c = this._routeParams.c;
+
+    if (!c) return;
+
+    var path = DATA_DIR + this._routeParams.c;
+
     var events = [];
     ctrl._http.get(path)
       .success(function (data) {
