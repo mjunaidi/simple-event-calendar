@@ -113,7 +113,8 @@
       {"name" : "Week 2"},
       {"name" : "Week 3"},
       {"name" : "Week 4"},
-      {"name" : "Week 5"}
+      {"name" : "Week 5"},
+      {"name" : "Week 6"}
     ];
 
     var months = [
@@ -141,25 +142,60 @@
     var today = new Date();
     var y = today.getFullYear();
     ctrl.cal = {
-      "years" : []
+      "years" : [],
+      "events" : []
     };
     ctrl.setYear(y);
 
     // data part
     var path = DATA_DIR + this._routeParams.name;
+    var events = [];
     ctrl._http.get(path)
       .success(function (data) {
         ctrl._papa.parse(data)
           .then(function(result) {
-            console.log(result);
+            for (var i in result.data) {
+              var c = result.data[i];
+
+              // skip the first line if...
+              if (!c[0] || c[0] === 'year') {
+                continue;
+              }
+
+              var y = c[0];
+              var m = c[1];
+              var d = c[2];
+              var name = c[3];
+              var dt = new Date(Date.UTC(y, m, d));
+              var event = {
+                "date" : dt,
+                "year" : parseInt(y),
+                "month" : parseInt(m)-1,
+                "day" : parseInt(d),
+                "name" : name
+              };
+              events.push(event);
+            }
+
           }).catch(function(result) {
-            console.log('catch --> ' + result);
+            console.log(result);
           }).finally(function() {
-            console.log('done!');
+            ctrl.cal.events = events;
           });
       }).error(function (data) {
         console.log(data);
       });
+  };
+
+  MainController.prototype.hasEvent = function(dt) {
+    if (!(dt instanceof Date)) return false;
+    var ctrl = this;
+    var y = dt.getFullYear();
+    var m = dt.getMonth();
+    var d = dt.getDate();
+    var event = _.findWhere(ctrl.cal.events, {"year": y, "month": m, "day": d});
+    if (event === undefined) return false;
+    return true;
   };
 
   MainController.prototype.setYear = function(y) {
