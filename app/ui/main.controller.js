@@ -97,6 +97,9 @@
       ctrl.geoIp = response.data;
       var c = ctrl.geoIp.country_code.toLowerCase();
       ctrl._location.path('/c/' + c);
+    }, function(data) {
+      // when error, simply displat calendar
+      ctrl.initCalendar();
     });
   };
 
