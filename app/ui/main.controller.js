@@ -52,13 +52,12 @@
     this._themeService._themes = this.themes;
     this.store('theme', this._themeService.pick(8));
 
-    // FIXME: this.aboutOpts.config --> get.paths did not start with relative path
     this.aboutOpts = {
       templateUrl : 'app/ui/html/about.html',
       config : function() {
         return {
           'get' : {
-            'paths' : [ 'simple-event-calendar/app/ui/json/about.json' ],
+            'paths' : [ 'app/ui/json/about.json' ],
             'key' : 'init'
           }
         };
