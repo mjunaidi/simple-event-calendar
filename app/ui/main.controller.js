@@ -77,15 +77,27 @@
   };
 
   MainController.prototype._initBody = function() {
-    if (this._location.path() === '/'
-       || (this._location.path().indexOf('/c/') >= 0)
-    ) {
+    if (this._location.path() === '/') {
+      this.initGeoIp();
+    }
+
+    if (this._location.path().indexOf('/c/') >= 0) {
       this.initCalendar();
     }
 
     if (this._location.path() === '/blog') {
       /* Anything that needs to be executed in path /free goes here... */
     }
+  };
+
+  MainController.prototype.initGeoIp = function() {
+    var ctrl = this;
+    var url = 'http://freegeoip.net/json/';
+    ctrl._http.get(url).then(function(response) {
+      ctrl.geoIp = response.data;
+      var c = ctrl.geoIp.country_code.toLowerCase();
+      ctrl._location.path('/c/' + c);
+    });
   };
 
   MainController.prototype.initCalendar = function() {
