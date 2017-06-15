@@ -4,11 +4,17 @@
 
       <div class="page-header sec-year">
         <h2 class="text-center">
-          <button type="button" class="btn btn-default pull-left" ng-click="ctrl.prevYear()">
+          <button type="button" class="btn btn-default pull-left"
+              ng-click="ctrl.prevYear()"
+              uib-tooltip="{{y.id-1}}"
+              tooltip-placement="right">
             <span class="glyphicon glyphicon-chevron-left"></span>
           </button>
           {{y.id}}
-          <button type="button" class="btn btn-default pull-right" ng-click="ctrl.nextYear()">
+          <button type="button" class="btn btn-default pull-right"
+              ng-click="ctrl.nextYear()"
+              uib-tooltip="{{y.id+1}}"
+              tooltip-placement="left">
             <span class="glyphicon glyphicon-chevron-right"></span>
           </button>
         </h2>
