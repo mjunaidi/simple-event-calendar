@@ -92,7 +92,7 @@
 
   MainController.prototype.initGeoIp = function() {
     var ctrl = this;
-    var url = 'http://freegeoip.net/json/';
+    var url = 'https://freegeoip.net/json/';
     ctrl._http.get(url).then(function(response) {
       ctrl.geoIp = response.data;
       var c = ctrl.geoIp.country_code.toLowerCase();
