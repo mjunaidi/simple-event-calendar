@@ -80,7 +80,7 @@
       this.initGeoIp();
     }
 
-    if (this._location.path().indexOf('/c/') >= 0) {
+    if (this._location.path() === '/' || this._location.path().indexOf('/c/') >= 0) {
       this.initCalendar();
     }
 
@@ -98,7 +98,7 @@
       ctrl._location.path('/c/' + c);
     }, function(data) {
       // when error, simply displat calendar
-      ctrl.initCalendar();
+      console.log(data);
     });
   };
 
