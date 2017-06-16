@@ -36,7 +36,7 @@
               <td class="col-xs-1 text-center sec-day"
                   ng-repeat="d in m.dates | filter:{ week: $index } track by $index"
                   ng-class="[ctrl.hasEvent(d)?'danger':'',ctrl.isToday(d)?'info':'']"
-                  uib-tooltip="{{ctrl.hasEvent(d)?ctrl.eventOn(d).name:''}}"
+                  uib-tooltip="{{ctrl.hasEvent(d)?ctrl.eventOn(d).name:(ctrl.isToday(d)?'today':'')}}"
                   tooltip-append-to-body="true">
                 {{d.getDate()}}
               </td>
