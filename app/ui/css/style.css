@@ -181,3 +181,8 @@ div.home {
 
 .sec-month {
 }
+
+.sec-day.has-event, .sec-day.is-today {
+  background-clip: padding-box; /* this has been added */
+  border-radius: 10px;
+}

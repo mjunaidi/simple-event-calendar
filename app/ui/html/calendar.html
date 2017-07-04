@@ -5,16 +5,12 @@
       <div class="page-header sec-year">
         <h2 class="text-center">
           <button type="button" class="btn btn-default pull-left"
-              ng-click="ctrl.prevYear()"
-              uib-tooltip="{{y.id-1}}"
-              tooltip-placement="right">
+              ng-click="ctrl.prevYear()">
             <span class="glyphicon glyphicon-chevron-left"></span>
           </button>
           {{y.id}}
           <button type="button" class="btn btn-default pull-right"
-              ng-click="ctrl.nextYear()"
-              uib-tooltip="{{y.id+1}}"
-              tooltip-placement="left">
+              ng-click="ctrl.nextYear()">
             <span class="glyphicon glyphicon-chevron-right"></span>
           </button>
         </h2>
@@ -35,7 +31,7 @@
             <tr ng-repeat="w in ctrl.names.weeks track by $index">
               <td class="col-xs-1 text-center sec-day"
                   ng-repeat="d in m.dates | filter:{ week: $index } track by $index"
-                  ng-class="[ctrl.hasEvent(d)?'danger':'',ctrl.isToday(d)?'info':'']"
+                  ng-class="[ctrl.hasEvent(d)?'has-event danger':'',ctrl.isToday(d)?'is-today info':'']"
                   uib-tooltip="{{ctrl.hasEvent(d)?ctrl.eventOn(d).name:(ctrl.isToday(d)?'today':'')}}"
                   tooltip-append-to-body="true">
                 {{d.getDate()}}
